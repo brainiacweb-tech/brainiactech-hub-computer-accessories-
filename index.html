@@ -14,6 +14,30 @@
 <body>
 
   <!-- ============================================================
+       BRAND GATEKEEPER WELCOME SCREEN
+  ============================================================ -->
+  <div class="gatekeeper-screen" id="gatekeeperScreen">
+    <div class="gatekeeper-card" id="gatekeeperCard">
+      <img src="images/my%20logo.png" alt="BrainiacTech Hub Logo" class="gatekeeper-logo" />
+      <h2 class="gatekeeper-title">BrainiacTech <span>Hub</span></h2>
+      <p class="gatekeeper-desc">Your trusted one-stop partner for professional computer repairs, genuine software, and advanced IT networking solutions.</p>
+      
+      <div class="gatekeeper-actions">
+        <button class="btn-gatekeeper-login" id="btnGatekeeperLogin">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+        <button class="btn-gatekeeper-register" id="btnGatekeeperRegister">
+          <i class="fa-solid fa-user-plus"></i> Create Account
+        </button>
+      </div>
+      
+      <a href="#" class="btn-gatekeeper-guest" id="btnGatekeeperGuest">
+        Continue as Guest <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================
        NAVBAR
   ============================================================ -->
   <nav id="navbar">
@@ -1766,6 +1790,11 @@
         if (femail && !femail.value) femail.value = user.email;
         if (fphone && !fphone.value) fphone.value = user.phone;
 
+        // Auto-dismiss gatekeeper landing screen on login/signup success
+        if (gatekeeperScreen && !gatekeeperScreen.classList.contains('fade-out')) {
+          dismissGatekeeper();
+        }
+
       } else {
         // Reset header
         authToggleLabel.innerText = 'Sign In';
@@ -1780,8 +1809,74 @@
       }
     }
 
-    // Run Auth UI Sync on startup
-    window.addEventListener('DOMContentLoaded', updateAuthUI);
+    // ============================================================
+    // BRAND GATEKEEPER LANDING PAGE SCREEN LOGIC
+    // ============================================================
+    const gatekeeperScreen = document.getElementById('gatekeeperScreen');
+    const btnGatekeeperLogin = document.getElementById('btnGatekeeperLogin');
+    const btnGatekeeperRegister = document.getElementById('btnGatekeeperRegister');
+    const btnGatekeeperGuest = document.getElementById('btnGatekeeperGuest');
+
+    function checkGatekeeperState() {
+      const user = getCurrentUser();
+      const isGuest = sessionStorage.getItem('brainiac_guest') === 'true';
+
+      if (user || isGuest) {
+        // Bypass gatekeeper entirely
+        if (gatekeeperScreen) {
+          gatekeeperScreen.style.display = 'none';
+        }
+      } else {
+        // Show gatekeeper page
+        if (gatekeeperScreen) {
+          gatekeeperScreen.classList.add('active');
+          body.classList.add('no-scroll');
+        }
+      }
+    }
+
+    // Dismiss gatekeeper cleanly with transition haptic feedback
+    function dismissGatekeeper() {
+      if (gatekeeperScreen) {
+        gatekeeperScreen.classList.add('fade-out');
+        body.classList.remove('no-scroll');
+        setTimeout(() => {
+          gatekeeperScreen.style.display = 'none';
+        }, 400);
+      }
+    }
+
+    if (btnGatekeeperLogin) {
+      btnGatekeeperLogin.addEventListener('click', () => {
+        openAuthModal();
+      });
+    }
+
+    if (btnGatekeeperRegister) {
+      btnGatekeeperRegister.addEventListener('click', () => {
+        openAuthModal();
+        // Immediately switch card views inside Modal to register
+        setTimeout(() => {
+          loginCard.style.display = 'none';
+          registerCard.style.display = 'block';
+        }, 50);
+      });
+    }
+
+    if (btnGatekeeperGuest) {
+      btnGatekeeperGuest.addEventListener('click', (e) => {
+        e.preventDefault();
+        sessionStorage.setItem('brainiac_guest', 'true');
+        dismissGatekeeper();
+        showToastNotification('Welcome! Continuing as guest...', 'fa-solid fa-user-astronaut');
+      });
+    }
+
+    // Run startup sync and state checks
+    window.addEventListener('DOMContentLoaded', () => {
+      updateAuthUI();
+      checkGatekeeperState();
+    });
   </script>
 </body>
 </html>

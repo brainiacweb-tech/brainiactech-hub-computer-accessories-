@@ -3348,6 +3348,166 @@ section { padding: 90px 0; }
   }
 }
 
+/* ============================================================
+   BRAND GATEKEEPER LANDING SCREEN
+   ============================================================ */
+.gatekeeper-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: var(--hero-gradient);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+.gatekeeper-screen.active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+.gatekeeper-screen.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+  visibility: hidden;
+}
+
+.gatekeeper-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  border-radius: 24px !important;
+  padding: 48px 36px !important;
+  width: 480px !important;
+  max-width: 100% !important;
+  box-shadow: var(--shadow-blue), 0 20px 50px rgba(0, 0, 0, 0.35) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  animation: gatekeeperIntro 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes gatekeeperIntro {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.gatekeeper-logo {
+  width: 84px !important;
+  height: auto !important;
+  background: #0f172a !important;
+  padding: 6px 12px !important;
+  border-radius: 14px !important;
+  margin-bottom: 24px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.gatekeeper-title {
+  font-size: 2.1rem !important;
+  font-weight: 900 !important;
+  color: #ffffff !important;
+  margin-bottom: 12px !important;
+  line-height: 1.2 !important;
+}
+
+.gatekeeper-title span {
+  color: var(--primary-light) !important;
+}
+
+.gatekeeper-desc {
+  font-size: 0.92rem !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  line-height: 1.65 !important;
+  margin-bottom: 36px !important;
+  max-width: 380px !important;
+}
+
+.gatekeeper-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  gap: 12px !important;
+  margin-bottom: 24px !important;
+}
+
+.btn-gatekeeper-login {
+  width: 100% !important;
+  background: var(--btn-gradient) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 14px !important;
+  border-radius: 12px !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.35) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-gatekeeper-login:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(26, 115, 232, 0.45) !important;
+}
+
+.btn-gatekeeper-register {
+  width: 100% !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  padding: 12px !important;
+  border-radius: 12px !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  transition: all 0.25s ease !important;
+}
+
+.btn-gatekeeper-register:hover {
+  border-color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-2px) !important;
+}
+
+.btn-gatekeeper-guest {
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: var(--primary-light) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  transition: var(--transition) !important;
+  margin-top: 12px !important;
+}
+
+.btn-gatekeeper-guest:hover {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+  transform: translateX(3px) !important;
+}
+
+/* Make sure modal eye toggles have high visibility on modal inputs */
+.btn-toggle-password {
+  z-index: 5 !important;
+}
+
+
 
 
 
