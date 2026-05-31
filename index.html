@@ -1189,9 +1189,37 @@
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
 
+  <!-- Mobile Bottom Tab Bar (KNUST Portal Design) -->
+  <div class="mobile-bottom-nav">
+    <a href="#hero" class="mobile-nav-item active" data-section="hero">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+    <a href="#services" class="mobile-nav-item" data-section="services">
+      <i class="fa-solid fa-gears"></i>
+      <span>Services</span>
+    </a>
+    <a href="#products" class="mobile-nav-item" data-section="products">
+      <i class="fa-solid fa-store"></i>
+      <span>Shop</span>
+    </a>
+    <a href="#" class="mobile-nav-item" id="mobileCartNavBtn">
+      <div class="mobile-cart-icon-wrap">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="mobile-cart-badge" id="mobileCartBadge">0</span>
+      </div>
+      <span>Cart</span>
+    </a>
+    <a href="#contact" class="mobile-nav-item" data-section="contact">
+      <i class="fa-solid fa-envelope"></i>
+      <span>Contact</span>
+    </a>
+  </div>
+
   <script src="cart.js"></script>
 
   <script>
+    // Header navigation drawer toggling
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.querySelector('.nav-links');
     const body = document.body;
@@ -1208,6 +1236,87 @@
         navToggle.classList.remove('active');
         navLinks.classList.remove('active');
         body.classList.remove('no-scroll');
+      });
+    });
+
+    // Sync Cart Badge value from desktop badge to mobile bottom tab badge
+    const cartBadge = document.getElementById('cartBadge');
+    const mobileCartBadge = document.getElementById('mobileCartBadge');
+    if (cartBadge && mobileCartBadge) {
+      mobileCartBadge.innerText = cartBadge.innerText;
+      const observer = new MutationObserver(() => {
+        mobileCartBadge.innerText = cartBadge.innerText;
+      });
+      observer.observe(cartBadge, { childList: true, characterData: true, subtree: true });
+    }
+
+    // Toggle shopping cart drawer from the mobile bottom navigation
+    const mobileCartNavBtn = document.getElementById('mobileCartNavBtn');
+    const cartToggleBtn = document.getElementById('cartToggleBtn');
+    if (mobileCartNavBtn && cartToggleBtn) {
+      mobileCartNavBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        cartToggleBtn.click(); // Trigger the standard cart open drawer logic
+      });
+    }
+
+    // Bottom Navigation Scrolling Spier and Active Class Toggler
+    const sections = document.querySelectorAll('section, header, footer');
+    const mobileNavItems = document.querySelectorAll('.mobile-nav-item[data-section]');
+
+    function scrollSpy() {
+      let currentSection = 'hero';
+      const scrollPos = window.scrollY + 120;
+
+      sections.forEach(section => {
+        const id = section.getAttribute('id');
+        if (id) {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            currentSection = id;
+          }
+        }
+      });
+
+      mobileNavItems.forEach(item => {
+        const sectionAttr = item.getAttribute('data-section');
+        if (sectionAttr === currentSection) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', scrollSpy);
+    window.addEventListener('load', scrollSpy);
+
+    // Make Hero Services Mockup Icons fully interactive Quick Actions
+    const mockupBoxes = document.querySelectorAll('.mockup-icon-box');
+    mockupBoxes.forEach((box, index) => {
+      box.style.cursor = 'pointer';
+      box.addEventListener('click', () => {
+        const iconText = box.querySelector('p').innerText.toLowerCase();
+        
+        if (iconText.includes('support') || iconText.includes('repair') || iconText.includes('network') || iconText.includes('windows') || iconText.includes('data')) {
+          // Smooth scroll to services
+          const target = document.getElementById('services');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        } else if (iconText.includes('antivirus')) {
+          // Smooth scroll to products and activate software filter pill if present
+          const target = document.getElementById('products');
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+            
+            // Automatically click the software filter pill for premium UX
+            const softwarePill = document.querySelector('.filter-pill[data-category="software"]');
+            if (softwarePill) {
+              softwarePill.click();
+            }
+          }
+        }
       });
     });
   </script>
