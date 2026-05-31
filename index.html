@@ -1267,7 +1267,6 @@
         <div class="auth-card" id="loginCard">
           <div class="auth-card-header">
             <h3><i class="fa-solid fa-lock" style="color:var(--primary)"></i> Sign In</h3>
-            <p>Welcome back! Sign in to access your orders and account.</p>
           </div>
           <form id="loginForm">
             <div class="form-group">
@@ -1286,14 +1285,13 @@
                   <i class="fa-regular fa-eye-slash"></i>
                 </button>
               </div>
-              <a href="#" class="forgot-pass-link" id="btnForgotPass">Forgot password?</a>
             </div>
             <button type="submit" class="btn-auth-submit">
               <i class="fa-solid fa-right-to-bracket"></i> Login
             </button>
           </form>
           <div class="auth-card-footer">
-            <p>New to BrainiacTech Hub? <a href="#" id="linkSwitchToRegister"><strong>Create an Account</strong></a></p>
+            <p>New to BrainiacTech? <a href="#" id="linkSwitchToRegister"><strong>Create an Account</strong></a></p>
           </div>
         </div>
 
@@ -1301,7 +1299,6 @@
         <div class="auth-card" id="registerCard" style="display: none;">
           <div class="auth-card-header">
             <h3><i class="fa-solid fa-user-plus" style="color:var(--primary)"></i> Create Account</h3>
-            <p>Register to enjoy faster checkouts and personalized services.</p>
           </div>
           <form id="registerForm">
             <div class="form-group">
@@ -1319,13 +1316,6 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="registerPhone">Phone Number</label>
-              <div class="input-icon-wrap">
-                <i class="fa-solid fa-phone input-icon"></i>
-                <input type="tel" id="registerPhone" placeholder="+233 24 915 3064" required />
-              </div>
-            </div>
-            <div class="form-group">
               <label for="registerPassword">Password</label>
               <div class="input-icon-wrap">
                 <i class="fa-solid fa-key input-icon"></i>
@@ -1335,10 +1325,7 @@
                 </button>
               </div>
             </div>
-            <div class="form-group checkbox-group">
-              <input type="checkbox" id="registerAgree" required />
-              <label for="registerAgree">I agree to the <a href="#">Terms &amp; Policies</a></label>
-            </div>
+            <p class="auth-agreement-notice">By registering, you agree to our <a href="#">Terms &amp; Policies</a></p>
             <button type="submit" class="btn-auth-submit">
               <i class="fa-solid fa-user-plus"></i> Register
             </button>
@@ -1688,14 +1675,7 @@
       e.preventDefault();
       const name = document.getElementById('registerName').value.trim();
       const email = document.getElementById('registerEmail').value.trim().toLowerCase();
-      const phone = document.getElementById('registerPhone').value.trim();
       const password = document.getElementById('registerPassword').value;
-      const agree = document.getElementById('registerAgree').checked;
-
-      if (!agree) {
-        showToastNotification('You must agree to the terms & policies', 'fa-solid fa-triangle-exclamation');
-        return;
-      }
 
       const users = getUsers();
       const emailExists = users.some(u => u.email === email);
@@ -1704,8 +1684,8 @@
         return;
       }
 
-      // Add user to local DB
-      const newUser = { name, email, phone, password };
+      // Add user to local DB (phone number defaults to empty/can be added in profile)
+      const newUser = { name, email, phone: '', password };
       users.push(newUser);
       saveUsers(users);
 
