@@ -35,6 +35,22 @@
           <li><a href="#contact" class="nav-cta">Contact Us</a></li>
         </ul>
         <div class="nav-actions">
+          <div class="nav-auth-wrap" id="navAuthWrap">
+            <button class="auth-toggle-btn" id="authToggleBtn" aria-label="Account Login">
+              <i class="fa-regular fa-user"></i>
+              <span id="authToggleLabel">Sign In</span>
+            </button>
+            <div class="auth-dropdown" id="authDropdown">
+              <div class="auth-dropdown-header">
+                <h4 id="dropdownUserTitle">My Account</h4>
+                <p id="dropdownUserSub">Welcome to BrainiacTech</p>
+              </div>
+              <div class="auth-dropdown-divider"></div>
+              <a href="#" class="auth-dropdown-item" id="btnDropdownProfile"><i class="fa-regular fa-user"></i> My Profile</a>
+              <a href="#" class="auth-dropdown-item" id="btnDropdownOrders"><i class="fa-solid fa-receipt"></i> My Orders</a>
+              <a href="#" class="auth-dropdown-item" id="btnDropdownLogout" style="color: #dc3545;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            </div>
+          </div>
           <button class="cart-toggle-btn" id="cartToggleBtn" aria-label="View Shopping Cart">
             <i class="fa-solid fa-cart-shopping"></i>
             <span class="cart-badge" id="cartBadge">0</span>
@@ -1210,10 +1226,157 @@
       </div>
       <span>Cart</span>
     </a>
-    <a href="#contact" class="mobile-nav-item" data-section="contact">
-      <i class="fa-solid fa-envelope"></i>
-      <span>Contact</span>
+    <a href="#" class="mobile-nav-item" id="mobileAuthNavBtn">
+      <i class="fa-regular fa-user"></i>
+      <span id="mobileAuthLabel">Account</span>
     </a>
+  </div>
+
+  <!-- Jumia-Style Authentication Modal (Sign In & Sign Up) -->
+  <div class="auth-modal" id="authModal">
+    <div class="auth-modal-backdrop" id="authModalBackdrop"></div>
+    <div class="auth-modal-content">
+      <button class="auth-close-btn" id="authCloseBtn" aria-label="Close Authentication">&times;</button>
+      <div class="auth-cards-container">
+        
+        <!-- Login Card -->
+        <div class="auth-card" id="loginCard">
+          <div class="auth-card-header">
+            <h3><i class="fa-solid fa-lock" style="color:var(--primary)"></i> Sign In</h3>
+            <p>Welcome back! Sign in to access your orders and account.</p>
+          </div>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="loginEmail">Email Address</label>
+              <div class="input-icon-wrap">
+                <i class="fa-regular fa-envelope input-icon"></i>
+                <input type="email" id="loginEmail" placeholder="you@example.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <div class="input-icon-wrap">
+                <i class="fa-solid fa-key input-icon"></i>
+                <input type="password" id="loginPassword" placeholder="••••••••" required />
+                <button type="button" class="btn-toggle-password" data-target="loginPassword" aria-label="Show password">
+                  <i class="fa-regular fa-eye-slash"></i>
+                </button>
+              </div>
+              <a href="#" class="forgot-pass-link" id="btnForgotPass">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-auth-submit">
+              <i class="fa-solid fa-right-to-bracket"></i> Login
+            </button>
+          </form>
+          <div class="auth-card-footer">
+            <p>New to BrainiacTech Hub? <a href="#" id="linkSwitchToRegister"><strong>Create an Account</strong></a></p>
+          </div>
+        </div>
+
+        <!-- Register Card -->
+        <div class="auth-card" id="registerCard" style="display: none;">
+          <div class="auth-card-header">
+            <h3><i class="fa-solid fa-user-plus" style="color:var(--primary)"></i> Create Account</h3>
+            <p>Register to enjoy faster checkouts and personalized services.</p>
+          </div>
+          <form id="registerForm">
+            <div class="form-group">
+              <label for="registerName">Full Name</label>
+              <div class="input-icon-wrap">
+                <i class="fa-regular fa-user input-icon"></i>
+                <input type="text" id="registerName" placeholder="Francis Brainiac" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="registerEmail">Email Address</label>
+              <div class="input-icon-wrap">
+                <i class="fa-regular fa-envelope input-icon"></i>
+                <input type="email" id="registerEmail" placeholder="you@example.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="registerPhone">Phone Number</label>
+              <div class="input-icon-wrap">
+                <i class="fa-solid fa-phone input-icon"></i>
+                <input type="tel" id="registerPhone" placeholder="+233 24 915 3064" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="registerPassword">Password</label>
+              <div class="input-icon-wrap">
+                <i class="fa-solid fa-key input-icon"></i>
+                <input type="password" id="registerPassword" placeholder="••••••••" required />
+                <button type="button" class="btn-toggle-password" data-target="registerPassword" aria-label="Show password">
+                  <i class="fa-regular fa-eye-slash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="form-group checkbox-group">
+              <input type="checkbox" id="registerAgree" required />
+              <label for="registerAgree">I agree to the <a href="#">Terms &amp; Policies</a></label>
+            </div>
+            <button type="submit" class="btn-auth-submit">
+              <i class="fa-solid fa-user-plus"></i> Register
+            </button>
+          </form>
+          <div class="auth-card-footer">
+            <p>Already have an account? <a href="#" id="linkSwitchToLogin"><strong>Sign In</strong></a></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Profile Drawer Dashboard (KNUST / Jumia Mobile Portal Layout) -->
+  <div class="profile-drawer" id="profileDrawer">
+    <div class="profile-drawer-backdrop" id="profileDrawerBackdrop"></div>
+    <div class="profile-drawer-content">
+      <div class="profile-drawer-header">
+        <h3><i class="fa-regular fa-user"></i> My Account</h3>
+        <button class="profile-close-btn" id="profileCloseBtn" aria-label="Close Profile Dashboard">&times;</button>
+      </div>
+      <div class="profile-drawer-body">
+        <!-- User summary block -->
+        <div class="profile-user-card">
+          <div class="profile-avatar"><i class="fa-solid fa-user-tie"></i></div>
+          <div class="profile-info">
+            <h4 id="profileUserName">Francis Brainiac</h4>
+            <p id="profileUserEmail">you@gmail.com</p>
+            <span class="profile-badge"><i class="fa-solid fa-circle-check"></i> Standard Member</span>
+          </div>
+        </div>
+
+        <!-- Section list links -->
+        <div class="profile-sections-list">
+          <div class="profile-section-item">
+            <div class="icon"><i class="fa-solid fa-user-gear"></i></div>
+            <div class="details">
+              <h5>Account Details</h5>
+              <p>Phone: <strong id="profileUserPhone">+233 24 915 3064</strong></p>
+            </div>
+          </div>
+          <div class="profile-section-item" id="btnProfileDrawerCart">
+            <div class="icon"><i class="fa-solid fa-cart-shopping"></i></div>
+            <div class="details">
+              <h5>My Shopping Cart</h5>
+              <p>Check pending items in your bag.</p>
+            </div>
+          </div>
+          <div class="profile-section-item">
+            <div class="icon"><i class="fa-solid fa-receipt"></i></div>
+            <div class="details">
+              <h5>Order History</h5>
+              <p>View quotes and WhatsApp receipts.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-profile-logout" id="btnProfileLogout">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </div>
   </div>
 
   <script src="cart.js"></script>
@@ -1319,6 +1482,306 @@
         }
       });
     });
+
+    // ============================================================
+    // JUMIA-STYLE USER AUTHENTICATION & PROFILE SYSTEM
+    // ============================================================
+    
+    // Auth DOM Elements
+    const authModal = document.getElementById('authModal');
+    const authModalBackdrop = document.getElementById('authModalBackdrop');
+    const authCloseBtn = document.getElementById('authCloseBtn');
+    const authToggleBtn = document.getElementById('authToggleBtn');
+    const authToggleLabel = document.getElementById('authToggleLabel');
+    const navAuthWrap = document.getElementById('navAuthWrap');
+    const authDropdown = document.getElementById('authDropdown');
+    const mobileAuthNavBtn = document.getElementById('mobileAuthNavBtn');
+    const mobileAuthLabel = document.getElementById('mobileAuthLabel');
+
+    const loginCard = document.getElementById('loginCard');
+    const registerCard = document.getElementById('registerCard');
+    const linkSwitchToRegister = document.getElementById('linkSwitchToRegister');
+    const linkSwitchToLogin = document.getElementById('linkSwitchToLogin');
+
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    // Profile Drawer Elements
+    const profileDrawer = document.getElementById('profileDrawer');
+    const profileDrawerBackdrop = document.getElementById('profileDrawerBackdrop');
+    const profileCloseBtn = document.getElementById('profileCloseBtn');
+    const btnProfileLogout = document.getElementById('btnProfileLogout');
+    const btnDropdownLogout = document.getElementById('btnDropdownLogout');
+    
+    const profileUserName = document.getElementById('profileUserName');
+    const profileUserEmail = document.getElementById('profileUserEmail');
+    const profileUserPhone = document.getElementById('profileUserPhone');
+    const dropdownUserTitle = document.getElementById('dropdownUserTitle');
+    const dropdownUserSub = document.getElementById('dropdownUserSub');
+
+    // Toast show helper function
+    function showToastNotification(message, iconClass = 'fa-solid fa-circle-check') {
+      const container = document.getElementById('toastContainer');
+      if (container) {
+        const toast = document.createElement('div');
+        toast.className = 'toast show';
+        toast.innerHTML = `<i class="${iconClass}"></i><span>${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+    }
+
+    // Toggle Modal Opening
+    function openAuthModal() {
+      authModal.classList.add('active');
+      body.classList.add('no-scroll');
+      // Always reset to Login form first
+      loginCard.style.display = 'block';
+      registerCard.style.display = 'none';
+    }
+
+    function closeAuthModal() {
+      authModal.classList.remove('active');
+      body.classList.remove('no-scroll');
+    }
+
+    // Toggle Password Visibility Eye Trigger
+    document.querySelectorAll('.btn-toggle-password').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const input = document.getElementById(targetId);
+        const icon = btn.querySelector('i');
+        
+        if (input && icon) {
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.className = 'fa-regular fa-eye';
+            btn.setAttribute('aria-label', 'Hide password');
+          } else {
+            input.type = 'password';
+            icon.className = 'fa-regular fa-eye-slash';
+            btn.setAttribute('aria-label', 'Show password');
+          }
+        }
+      });
+    });
+
+    // Form switches
+    linkSwitchToRegister.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginCard.style.display = 'none';
+      registerCard.style.display = 'block';
+    });
+
+    linkSwitchToLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      registerCard.style.display = 'none';
+      loginCard.style.display = 'block';
+    });
+
+    // Close on backdrop or close button click
+    authCloseBtn.addEventListener('click', closeAuthModal);
+    authModalBackdrop.addEventListener('click', closeAuthModal);
+
+    // Desktop auth button behavior
+    authToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const currentUser = getCurrentUser();
+      if (currentUser) {
+        // Toggle dropdown on desktop
+        authDropdown.classList.toggle('active');
+      } else {
+        openAuthModal();
+      }
+    });
+
+    // Mobile auth button behavior
+    if (mobileAuthNavBtn) {
+      mobileAuthNavBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const currentUser = getCurrentUser();
+        if (currentUser) {
+          // Open profile slide dashboard on mobile
+          profileDrawer.classList.add('active');
+          body.classList.add('no-scroll');
+        } else {
+          openAuthModal();
+        }
+      });
+    }
+
+    // Close Profile Drawer
+    profileCloseBtn.addEventListener('click', closeProfileDrawer);
+    profileDrawerBackdrop.addEventListener('click', closeProfileDrawer);
+    
+    function closeProfileDrawer() {
+      profileDrawer.classList.remove('active');
+      body.classList.remove('no-scroll');
+    }
+
+    // Connect drawer cart item click to standard cart trigger
+    const btnProfileDrawerCart = document.getElementById('btnProfileDrawerCart');
+    if (btnProfileDrawerCart) {
+      btnProfileDrawerCart.addEventListener('click', () => {
+        closeProfileDrawer();
+        setTimeout(() => cartToggleBtn.click(), 300);
+      });
+    }
+
+    // Dismiss dropdown on window click
+    window.addEventListener('click', () => {
+      authDropdown.classList.remove('active');
+    });
+    authDropdown.addEventListener('click', (e) => e.stopPropagation());
+
+    // LocalStorage DB Helpers
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('brainiac_users') || '[]');
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem('brainiac_users', JSON.stringify(users));
+    }
+
+    function getCurrentUser() {
+      return JSON.parse(localStorage.getItem('brainiac_session') || 'null');
+    }
+
+    function setCurrentUser(user) {
+      if (user) {
+        localStorage.setItem('brainiac_session', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('brainiac_session');
+      }
+      updateAuthUI();
+    }
+
+    // Register Submit Form Handling
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value.trim();
+      const email = document.getElementById('registerEmail').value.trim().toLowerCase();
+      const phone = document.getElementById('registerPhone').value.trim();
+      const password = document.getElementById('registerPassword').value;
+      const agree = document.getElementById('registerAgree').checked;
+
+      if (!agree) {
+        showToastNotification('You must agree to the terms & policies', 'fa-solid fa-triangle-exclamation');
+        return;
+      }
+
+      const users = getUsers();
+      const emailExists = users.some(u => u.email === email);
+      if (emailExists) {
+        showToastNotification('Account email already registered!', 'fa-solid fa-triangle-exclamation');
+        return;
+      }
+
+      // Add user to local DB
+      const newUser = { name, email, phone, password };
+      users.push(newUser);
+      saveUsers(users);
+
+      // Auto login user
+      setCurrentUser(newUser);
+      closeAuthModal();
+      registerForm.reset();
+      showToastNotification(`Welcome, ${name.split(' ')[0]}! Account created successfully.`);
+    });
+
+    // Login Submit Form Handling
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+
+      const users = getUsers();
+      const user = users.find(u => u.email === email);
+      
+      if (!user) {
+        showToastNotification('Account does not exist!', 'fa-solid fa-triangle-exclamation');
+        return;
+      }
+
+      if (user.password !== password) {
+        showToastNotification('Incorrect email or password!', 'fa-solid fa-triangle-exclamation');
+        return;
+      }
+
+      setCurrentUser(user);
+      closeAuthModal();
+      loginForm.reset();
+      showToastNotification(`Welcome back, ${user.name.split(' ')[0]}!`);
+    });
+
+    // Logout logic
+    function handleLogout() {
+      setCurrentUser(null);
+      authDropdown.classList.remove('active');
+      closeProfileDrawer();
+      showToastNotification('Logged out successfully.', 'fa-solid fa-arrow-right-from-bracket');
+    }
+
+    btnDropdownLogout.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleLogout();
+    });
+
+    btnProfileLogout.addEventListener('click', handleLogout);
+
+    // Update UI Elements based on Authentication State
+    function updateAuthUI() {
+      const user = getCurrentUser();
+      if (user) {
+        const firstName = user.name.split(' ')[0];
+        // Header updates
+        authToggleLabel.innerText = `Hi, ${firstName}`;
+        navAuthWrap.classList.add('logged-in');
+        dropdownUserTitle.innerText = user.name;
+        dropdownUserSub.innerText = user.email;
+
+        // Mobile nav updates
+        if (mobileAuthLabel) {
+          mobileAuthLabel.innerText = firstName;
+        }
+
+        // Profile Drawer dashboard updates
+        if (profileUserName) profileUserName.innerText = user.name;
+        if (profileUserEmail) profileUserEmail.innerText = user.email;
+        if (profileUserPhone) profileUserPhone.innerText = user.phone;
+
+        // Auto pre-fill checkout and contact form inputs!
+        const cname = document.getElementById('cname');
+        const cphone = document.getElementById('cphone');
+        const fname = document.getElementById('fname');
+        const femail = document.getElementById('femail');
+        const fphone = document.getElementById('fphone');
+
+        if (cname && !cname.value) cname.value = user.name;
+        if (cphone && !cphone.value) cphone.value = user.phone;
+        if (fname && !fname.value) fname.value = user.name;
+        if (femail && !femail.value) femail.value = user.email;
+        if (fphone && !fphone.value) fphone.value = user.phone;
+
+      } else {
+        // Reset header
+        authToggleLabel.innerText = 'Sign In';
+        navAuthWrap.classList.remove('logged-in');
+        dropdownUserTitle.innerText = 'My Account';
+        dropdownUserSub.innerText = 'Welcome to BrainiacTech';
+
+        // Reset mobile nav
+        if (mobileAuthLabel) {
+          mobileAuthLabel.innerText = 'Account';
+        }
+      }
+    }
+
+    // Run Auth UI Sync on startup
+    window.addEventListener('DOMContentLoaded', updateAuthUI);
   </script>
 </body>
 </html>
