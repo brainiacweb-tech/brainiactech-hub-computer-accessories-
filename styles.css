@@ -2401,23 +2401,240 @@ section { padding: 90px 0; }
   box-shadow: 0 6px 22px rgba(26, 115, 232, 0.45);
 }
 
-/* Responsive overrides */
-@media (max-width: 768px) {
-  .qv-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .qv-image-side {
-    position: relative;
-    padding: 15px;
-  }
-  .qv-modal-content {
-    padding: 24px;
-    width: 95%;
-  }
-  .shop-controls {
-    padding: 18px;
+/* ============================================================
+   PREMIUM MOBILE OPTIMIZATIONS & RESPONSIVE FIXES
+   ============================================================ */
+
+/* Screens ≤ 900px */
+@media (max-width: 900px) {
+  /* Ensure header container is aligned cleanly */
+  .nav-inner {
+    padding: 0;
   }
 }
+
+/* Screens ≤ 768px */
+@media (max-width: 768px) {
+  /* Modern Horizontal Scrollable Filter Pills for Native App Feel */
+  .filter-pills {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 8px !important;
+    padding: 0 4px 12px 4px !important;
+    margin: 0 -4px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important; /* Firefox */
+  }
+  .filter-pills::-webkit-scrollbar {
+    display: none !important; /* Safari and Chrome */
+  }
+  .filter-pill {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 8px 16px !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Quick View Modal Responsiveness & Sticky Scrolling Fix */
+  .qv-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .qv-image-side {
+    position: relative !important;
+    top: auto !important;
+    padding: 15px !important;
+  }
+  .qv-modal-content {
+    padding: 24px !important;
+    width: 95% !important;
+  }
+  .shop-controls {
+    padding: 18px !important;
+  }
+}
+
+/* Screens ≤ 576px */
+@media (max-width: 576px) {
+  /* Product Grid card scaling & description clamping */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  .product-card {
+    border-radius: 12px !important;
+  }
+  .product-img {
+    height: 135px !important;
+  }
+  .product-body {
+    padding: 12px !important;
+  }
+  .product-body h4 {
+    font-size: 0.85rem !important;
+    margin-bottom: 4px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .product-body p {
+    font-size: 0.72rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 10px !important;
+    /* Premium text clamp to precisely 2 lines */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    height: 2.8em !important; /* Visual height for 2 lines */
+  }
+  .card-rating {
+    margin-bottom: 4px !important;
+  }
+  .rating-stars {
+    font-size: 0.7rem !important;
+  }
+  .rating-count {
+    font-size: 0.68rem !important;
+  }
+  .product-price {
+    font-size: 0.9rem !important;
+    margin-bottom: 6px !important;
+  }
+  .btn-add-cart {
+    padding: 8px !important;
+    font-size: 0.78rem !important;
+    border-radius: 6px !important;
+  }
+}
+
+/* Screens ≤ 480px */
+@media (max-width: 480px) {
+  /* Header logo scaling to prevent cramped overlapping */
+  .nav-logo .logo-sub {
+    display: none !important;
+  }
+  .nav-logo .logo-text {
+    font-size: 0.95rem !important;
+  }
+  .nav-logo .logo-icon {
+    height: 38px !important;
+    padding: 2px 4px !important;
+  }
+  .nav-logo .logo-icon img {
+    height: 30px !important;
+  }
+  .nav-actions {
+    gap: 8px !important;
+  }
+  .cart-toggle-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Hero Section vertical stack and adjustments */
+  .hero-title {
+    font-size: 1.8rem !important;
+  }
+  .hero-description {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 24px !important;
+  }
+  .hero-btns {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+  .hero-btns a {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 12px 20px !important;
+    font-size: 0.9rem !important;
+  }
+  .hero-stats {
+    gap: 20px !important;
+    margin-top: 32px !important;
+  }
+  .stat-item .stat-num {
+    font-size: 1.6rem !important;
+  }
+
+  /* About Floating Badge scaling */
+  .about-badge-float {
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+    bottom: -10px !important;
+    right: -10px !important;
+  }
+  .about-badge-float .num {
+    font-size: 1.4rem !important;
+  }
+  .about-badge-float .lbl {
+    font-size: 0.65rem !important;
+  }
+
+  /* "Why Choose Us" vertically centered compact style */
+  .why-card {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 24px 20px !important;
+    gap: 16px !important;
+  }
+  .why-text h3 {
+    margin-bottom: 6px !important;
+  }
+
+  /* Contact Form Padding adjustment for wider inputs */
+  .contact-form-wrap {
+    padding: 20px !important;
+    border-radius: 14px !important;
+  }
+  .form-title {
+    font-size: 1.1rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Quick View Modal scaling to avoid excessive scrolling */
+  .qv-image-side img {
+    max-height: 180px !important;
+  }
+  .qv-title {
+    font-size: 1.2rem !important;
+  }
+  .qv-price {
+    font-size: 1.2rem !important;
+    margin-bottom: 12px !important;
+  }
+}
+
+/* Screens ≤ 360px */
+@media (max-width: 360px) {
+  /* Grid collapses to 1 column on extremely small screens */
+  .products-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .product-img {
+    height: 160px !important;
+  }
+
+  /* Mobile Money wrap safety and alignment */
+  .momo-number-box {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+  }
+  .btn-copy-momo {
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
 
 
