@@ -2568,8 +2568,9 @@ section { padding: 90px 0; }
     height: 56px !important;
   }
 
-  /* Hide the redundant header cart badge since we have bottom cart */
-  #navbar .nav-actions .cart-toggle-btn {
+  /* Hide the redundant header cart badge and auth button since we have the bottom tab bar */
+  #navbar .nav-actions .cart-toggle-btn,
+  #navbar .nav-actions .nav-auth-wrap {
     display: none !important;
   }
 
